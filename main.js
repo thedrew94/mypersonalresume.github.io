@@ -182,6 +182,7 @@ curSlide++;
 }
 
 slides.forEach((s, i) => {
-s.style.transform = `translateX(${100 * (i - curSlide)}%)`;
+  // s.style.transition = "transform 0.5s";
+  s.style.transform = `translateX(${100 * (i - curSlide)}%)`;
 });
 });
