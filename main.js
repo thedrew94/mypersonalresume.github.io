@@ -74,7 +74,7 @@ const resumeTxt = document.querySelectorAll('.resume-txt');
 resumeBtnsContainer.addEventListener('click', function(e) {
     const clicked = e.target.closest('.resume-btns');
     if(!clicked) return;
-    resumeBtns.forEach(t => t.classList.remove('resume-btns-active'))
+    resumeBtns.forEach(t => t.classList.remove('resume-btns-active'));
     clicked.classList.add('resume-btns-active');
     resumeTxt.forEach(c => c.classList.remove('txt-active'));
     //display what clicked
@@ -82,9 +82,27 @@ resumeBtnsContainer.addEventListener('click', function(e) {
     // console.log(clicked.dataset.tab);
 
     //activate the txt content tab
-    document.querySelector(`.txt${clicked.dataset.tab}`).classList.add('txt-active')
+    document.querySelector(`.txt${clicked.dataset.tab}`).classList.add('txt-active');
 
+});
+
+const modalBtn = document.querySelectorAll('.modal-window');
+
+modalBtn.forEach(function (btn) {
+  btn.addEventListener('click', function(e) {
+    document.querySelector('.modal-window-container').style.display = 'block';
+    document.querySelector('.portfolio-background').style.filter = 'blur(5px)';
+    document.addEventListener('keydown', function(event) {
+      if (event.key === "Escape") {
+        document.querySelector('.modal-window-container').style.display = 'none';
+        document.querySelector('.portfolio-background').style.filter = 'blur(0px)';
+        
+      }
+    })
+  })
 })
+
+
 
 const minSecond = document.querySelector('.min-time-displaysecond');
 const secFirst = document.querySelector('.sec-time-displayfirst');
@@ -144,5 +162,26 @@ left: resumeCoords.left + window.pageXOffset,
 top: resumeCoords.top + window.pageYOffset - 250,
 behavior: 'smooth',
 });
+});
+});
+
+const slides = document.querySelectorAll('.slide');
+const btnRight = document.querySelector('.slideBtnLeft');
+let curSlide = 0;
+const maxSlide = slides.length;
+
+slides.forEach((s, i) => {
+s.style.transform = `translateX(${100 * i}%)`;
+});
+
+btnRight.addEventListener('click', function() {
+if (curSlide === maxSlide - 1) {
+curSlide = 0;
+} else {
+curSlide++;
+}
+
+slides.forEach((s, i) => {
+s.style.transform = `translateX(${100 * (i - curSlide)}%)`;
 });
 });
